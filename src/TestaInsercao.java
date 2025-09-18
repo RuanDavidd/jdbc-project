@@ -7,16 +7,17 @@ public class TestaInsercao {
     public static void main(String[] args) throws SQLException {
 
         ConnectionFactory factory = new ConnectionFactory();
-        Connection connection = factory.recuperarConexao();
+        try(Connection connection = factory.recuperarConexao()) {
 
-        Statement stm = connection.createStatement();
-        stm.execute("INSERT INTO Produto (nome, descricao) VALUES ('Mouse', 'Mouse sem fio')", Statement.RETURN_GENERATED_KEYS);
+            Statement stm = connection.createStatement();
+            stm.execute("INSERT INTO Produto (nome, descricao) VALUES ('Mouse', 'Mouse sem fio')",
+                    Statement.RETURN_GENERATED_KEYS);
 
-        ResultSet rst = stm.getGeneratedKeys();
-        while(rst.next()) {
-            Integer id = rst.getInt(1);
-            System.out.println("O id criado foi:" + id);
+            ResultSet rst = stm.getGeneratedKeys();
+            while (rst.next()) {
+                Integer id = rst.getInt(1);
+                System.out.println("O id criado foi:" + id);
+            }
         }
-
     }
 }
