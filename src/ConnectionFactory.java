@@ -7,13 +7,14 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     public DataSource dataSource;
+
     public ConnectionFactory(){
         ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC");//url de acordo com o bd utilizado. neste caso, o mysql.
+        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC");
         comboPooledDataSource.setUser("loja_virtual_user");
         comboPooledDataSource.setPassword("#S3nh4$D1f1c1l#");
 
-
+        comboPooledDataSource.setMaxPoolSize(15);
         this.dataSource = comboPooledDataSource;
     }
 
